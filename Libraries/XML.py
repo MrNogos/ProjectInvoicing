@@ -32,7 +32,7 @@ def get_info_from_xml(root):
     # This dictionary is created to use a 'CASE' funtion, similar to Java's one.
     dicti= {0 : "Emisor", 1 : "Receptor", 2 : "Concepto", 3 :  "Impuestos", 4 :  "Complementos"}
 
-
+    #use the RE module (regular exprecitions), to find the pattenrs needed for to scrap it from the XML file
     pattern_id = "[\w]+=\"[\w?\.?+?]*\""
     pattern_att = "[\w]+="
     pattern_att2 = "=\"[\w?\.?+?]*\""
@@ -46,7 +46,6 @@ def get_info_from_xml(root):
         j += 1
     j = 0 
     for i in root:
-        print(i)
         if j == 2 or j > 3:
             data[dicti[j]].update((root[j][0].attrib))
         elif j == 3:
@@ -58,14 +57,11 @@ def get_info_from_xml(root):
     return data
 
 def startXML():
-    
+    """Inicilize this module, it calls the other funtions and returns a Dictionary"""
     file_path = getFileLocation()
     root = getXML(file_path)
     data = get_info_from_xml(root)
 
-    for i in data['Comprobane']:
-        print(i)
-    print("HI " + data['Comprobane']['Total'])
     return data
 
     

@@ -1,47 +1,63 @@
 import mysql.connector
 
 db = mysql.connector.connect(
-    host="",
-    user="",
-    passwd=""
+    host="localhost",
+    user="root",
+    passwd="mynewpassword",
+    database="DBGP"
 )
 
 mycursor = db.cursor()
 
 mycursor.execute("CREATE DATABASE IF NOT EXISTS DBGP;")
-mycursor.execute("USE DBGP;")
-Table = ["Serie VARCHAR(1)",
-    "Version VARCHAR(3)",
-    "Rfc VARCHAR(12)",
-    "RegimenFiscal INT",
-    "UsoCFDI VARCHAR(4)"
-    "ClaveProdServ INT"
-    'Cantidad INT'
-    "ClaveUnidad VARCHAR(4)"
-    "ValorUnitario INT"
-    "Importe INT"
-    "Base INT"
-    "Impuesto INT"
-    "TipoFactor VARCHAR(6)"
-    "TasaOCuota INT"
-    "TotalImpuestosTrasladados INT"
-    "Rfc CHAR(12)"
-    "Nombre CHAR(50)"
-    "RegimenFiscal (INT)"
-    "Rfc VARCHAR(12)"
-    "Nombre VARCHAR(50)"
-    "UsoCFDI VARCHAR(4)"
-    "Descripcion	MEDIUMTEXT(500)"
-    "ValorUnitario int"
-    "Importe	int"
-    "UUID VARchar(36)"
-    "FechaTimbrado DATETIME(3)"
-
-
+#mycursor.execute("USE DBGP;")
+Table = ["Serie",
+    "Version",
+    "Rfc",
+    "RegimenFiscal",
+    "UsoCFDI",
+    "ClaveProdServ",
+    'Cantidad',
+    "ClaveUnidad",
+    "ValorUnitario",
+    "Importe",
+    "Base",
+    "Impuesto",
+    "TipoFactor",
+    "TasaOCuota",
+    "TotalImpuestosTrasladados",
+    "Nombre",
+    "RegimenFiscal",
+    "Descripcion",
+    "UUID",
+    "FechaTimbrado"
 ]
 
+def scrap_data(data):
+    clean = {}
+    for i in data.keys():
+        #print(i + ":")
+        for j in data[i].keys():
+            #print("     "+j + ": "+ str(data[i][j]))
+            if j in Table:
+                clean[j] = data[i][j]
+    print("hi")
+    #print(data["Comprobane"]["Serie"])
+    
+    return clean
+
+def insert_into(data):
+    columns = ", ".join("'" + str(x) + "'" for x in data.keys())
+    row_values = ", ".join("'" + str(x) + "'" for x in data.values())
+    #print(columns)
+    #print(row_values)
+    sql_q = "INSERT INTO Facturas_Internas(%s) VALUES(%s);" %(columns,row_values)
+    print(sql_q)
+    
+    mycursor.execute(sql_q)
+    mycursor.commit()
+
 #mycursor.execute("CREATE TABLE IF NOT EXISTS Facturas_Internas(MetodoPago varchar(3), TipoDeComprobante varchar(1), Total INT, Moneda VARCHAR(5), SubTotal INT, FormaPago INT, Folio INT)")
-
-
-
+#mycursor.execute("ALTER TABLE Facturas_Internas ADD PRIMARY KEY(UUID)")
+#mycursor.execute("ALTER TABLE Facturas_Internas ADD constraint unique(UUID)")
 

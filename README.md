@@ -8,6 +8,8 @@ Upload a XML files to strape it's data for stored in Excel format (which is in t
 
 ## EXCEL format
 
+A format used for quick insinghts and for not tecnical users. It is divided in 3 parts mainly:
+
 ### Dashboard
 It has a dashboard, in the first sheet, that holds information from other sheets. It actualize if the information every time that is hold in the other sheets. This dashboard helps to get insinghts from income and outcome.
 

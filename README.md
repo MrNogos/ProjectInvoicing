@@ -20,5 +20,7 @@ Other sheets are ones that represent every month, with their invoices informatio
 
 Both Raw sheets hold information as a list, one from invoices issued and the other for all invoices recibed. They are stored as a list for it easy of analysis.
 
+## MySQL
 
+It was selected given its widely adoption, use for several tech companies.
 

@@ -1,3 +1,4 @@
+from tokenize import Double
 import openpyxl
 from openpyxl.styles import PatternFill, Border, Side
 try:
@@ -109,7 +110,7 @@ def store_invoice(file_path, file_to_append):
                 sheet.insert_rows(iterations)
                 for i in range(0,10):
                     if i == 5 or i == 4:
-                        sheet.cell(row=iterations, column=i+1).value = file_to_append[i] / 10
+                        sheet.cell(row=iterations, column=i+1).value = Double(file_to_append[i] / 10)
                     else:
                         sheet.cell(row=iterations, column=i+1).value = file_to_append[i]
                 

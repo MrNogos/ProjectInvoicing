@@ -1,3 +1,4 @@
+from turtle import st
 import xml.etree.ElementTree as ET
 import tkinter as tk
 from tkinter import filedialog
@@ -54,6 +55,7 @@ def get_info_from_xml(root):
             data[dicti[j]].update((root[j].attrib))
         j += 1
     j = 0
+    print('-- HERE IS THE ERROR: '+ str(data["Comprobane"].values()))
     return data
 
 def startXML():
